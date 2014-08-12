@@ -1,39 +1,36 @@
 package io.github.bloodynoseproduction;
 
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+@SuppressWarnings("unused")
 public class UsefullStuff extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		// TODO
-		getLogger().info("onEnable has been invoked!");
+		getLogger().info("[UsefullStuff Enabled]");
+
+		new GraveplaceListener(this);
 		
-		//new PlayerListener(this);
-		new GraveplaceListener();
+		
+		
+		///////////////////////////////
+		//      command executor    //
+		/////////////////////////////
+		
+		this.getCommand("moo").setExecutor(new MyCommandExecutor(this));	
 	}
 	
 	@Override
 	public void onDisable() {
 		// TODO
-		getLogger().info("onDisable has been invoked!");
+		getLogger().info("[UsefullStuff Disabled]");
 	}
-	
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		
-		
-		if (cmd.getName().equalsIgnoreCase("hello") && sender instanceof Player) {
-			
-			Player player = (Player) sender;
-			player.sendMessage("Moo, " + player.getName() + "!");
-			
-			return true;
-		}
-		
-		return false;
-	}
-	
 }

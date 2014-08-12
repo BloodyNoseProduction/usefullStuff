@@ -2,6 +2,6 @@ name: UsefullStuff
 main: io.github.bloodynoseproduction.UsefullStuff
 version: 0.0.1b
 commands:
-    hello:
+    moo:
         description:
-        usage: / <command>
+        usage: /<command>
