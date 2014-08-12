@@ -13,7 +13,7 @@ public class UsefullStuff extends JavaPlugin {
 		getLogger().info("onEnable has been invoked!");
 		
 		//new PlayerListener(this);
-		new GraveplaceListener(this);
+		new GraveplaceListener();
 	}
 	
 	@Override
