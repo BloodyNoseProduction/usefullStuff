@@ -10,6 +10,7 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,27 +24,44 @@ import org.bukkit.potion.PotionEffectType;
  
 @SuppressWarnings("unused")
 public class GraveplaceListener implements Listener {
- 
-    //private UsefullStuff main;
-	//private static final ItemStack[][] ItemStack = null;
+
+
     UsefullStuff main;
 	public GraveplaceListener(UsefullStuff plugin){
     this.main= plugin;
     
     }
-    @EventHandler
-    public void PlayerDeath(PlayerDeathEvent event) {
-        Player player = event.getEntity();
-
-        int x = player.getLocation().getBlockX();
-        int y = player.getLocation().getBlockY();
-        int z = player.getLocation().getBlockZ();       
-        player.sendMessage("You died at " + "X: " + x + "Y: " + y + "Z: " + z);
-        }
-    @EventHandler
-    public void onEnttityDamageByEntity(EntityDamageByEntityEvent event){
-    	//TODO
-    }
+	 @EventHandler
+     public void PlayerDeath(PlayerDeathEvent event) {
+         org.bukkit.entity.Player player = event.getEntity();
+         org.bukkit.entity.Entity entity = event.getEntity();
+         int x = player.getLocation().getBlockX();
+         int y = player.getLocation().getBlockY();
+         int z = player.getLocation().getBlockZ();  
+         
+         float exp = player.getExp();
+         float level = player.getLevel();
+         float bottle = (float) (level/2);
+         player.sendMessage("Bottle: " + bottle + "| Exp: " + exp + "| lvl: " + level  );
+         
+         player.sendMessage("You died at " +"[u]"+ "X: " + x + "Y: " + y + "Z: " + z + "[/u]");
+         World w = player.getWorld();
+         Location loc = new Location(w, x, y, z);
+         loc.getBlock().setType(Material.CHEST);
+         player.sendMessage("A chest was placed at death point");
+         Chest c = (Chest) loc.getBlock().getState();
+         
+         ItemStack b = new ItemStack(Material.EXP_BOTTLE);
+         for(ItemStack i : event.getDrops()) {
+        	 c.getBlockInventory().addItem(i);
+         }
+         while(bottle > 0){
+        	 c.getBlockInventory().addItem(new ItemStack(Material.EXP_BOTTLE));
+        	 bottle--;
+         }
+         event.getDrops().clear();
+         event.setDroppedExp(0);
+	 }
 }
 
 

@@ -18,14 +18,12 @@ public class UsefullStuff extends JavaPlugin {
 		getLogger().info("[UsefullStuff Enabled]");
 
 		new GraveplaceListener(this);
-		
-		
-		
 		///////////////////////////////
 		//      command executor    //
 		/////////////////////////////
 		
 		this.getCommand("moo").setExecutor(new MyCommandExecutor(this));	
+		getServer().getPluginManager().registerEvents(new GraveplaceListener(this), this);
 	}
 	
 	@Override
