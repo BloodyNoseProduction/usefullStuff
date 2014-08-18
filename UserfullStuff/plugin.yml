@@ -5,3 +5,6 @@ commands:
     moo:
         description:
         usage: /<command>
+    cot:
+       description:
+       usage: /<command>
