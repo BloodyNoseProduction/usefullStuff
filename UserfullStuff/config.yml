@@ -1,0 +1,5 @@
+default:
+  playergrave:
+    enable: 'true'
+  cottage:
+    enable: 'true'

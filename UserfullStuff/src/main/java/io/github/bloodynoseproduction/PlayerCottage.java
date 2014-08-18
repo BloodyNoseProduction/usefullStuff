@@ -22,7 +22,7 @@ public class PlayerCottage implements Listener {
 	public void onPlayerInteractEvent(PlayerInteractEvent event) {
 		org.bukkit.entity.Player player = (Player) event.getPlayer();
 		
-		if(event.getAction() == org.bukkit.event.block.Action.LEFT_CLICK_BLOCK && event.getMaterial() == Material.WOOD_HOE && event.getMaterial() == Material.CHEST) {
+		if(event.getAction() == org.bukkit.event.block.Action.LEFT_CLICK_BLOCK && event.getMaterial() == Material.WOOD_HOE && event.getClickedBlock().getType() == Material.CHEST) {
 			player.sendMessage("That is a chest");
 		}
 	}
